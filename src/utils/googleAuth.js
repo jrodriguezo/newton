@@ -1,5 +1,7 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth"
+import { useDispatch } from 'react-redux'
 import { app } from "../../firebase.config"
+import { setUser } from "../redux/features/user/userSlice"
 
 async function googleAuth() {
     console.log('login...')
@@ -27,7 +29,7 @@ async function googleAuth() {
         // const credential = GoogleAuthProvider.credentialFromError(error)
       })
       */
-     console.log(response);
+     return response;
 }
 
 export default googleAuth
