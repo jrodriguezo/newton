@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { selectUser, setUser } from './redux/features/user/userSlice'
 import googleAuth from './utils/googleAuth'
-import './App.css'
 
 function App () {
   const dispatch = useDispatch()
@@ -21,7 +20,7 @@ function App () {
   }
 
   return (
-    <div className="App">
+    <div className="bg-slate-700 min-h-screen">
       { user
         ? <>
             <img src={user.photoURL} alt={user.displayName} referrerPolicy="no-referrer" />
