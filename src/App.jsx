@@ -1,25 +1,39 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, setUser, setUserAsync } from './redux/features/user/userSlice'
+import { selectUser, setUser } from './redux/features/user/userSlice'
 import googleAuth from './utils/googleAuth'
 import './App.css'
 
 function App() {
   const dispatch = useDispatch()
-  const user = useSelector(selectUser)
+  const {user} = useSelector(selectUser)
 
-  const handlerClick = async () => {
+  const handleLogin = async () => {
     const userDetails = await googleAuth();
-    dispatch(setUserAsync(userDetails))
+    const { user } = userDetails
+    const { providerData } = user
+    dispatch(setUser(providerData[0]))
+    localStorage.setItem('user', JSON.stringify(providerData[0]))
   }
 
-  // TODO: manage user
-  console.log({user})
+  const handleLogout =  () => {
+    dispatch(setUser(null))
+    localStorage.removeItem('user');
+  }
 
   return (
     <div className="App">
-      <button onClick={handlerClick}>
-        Login
-      </button>
+      { user
+        ? 
+          <>
+            <img src={user.photoURL} alt={user.displayName} referrerPolicy="no-referrer" />
+            <button onClick={handleLogout}>
+              Logout
+            </button>
+          </>
+        : <button onClick={handleLogin}>
+            Login
+          </button>
+      }
     </div>
   )
 }
