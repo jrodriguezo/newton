@@ -12,11 +12,10 @@ function Ranking({ rankingData }) {
     return index + 1
   }
 
-  const getBgRow = (index) => {
-    if(index === 0) return 'bg-purple-300'
-    if(index === 1) return 'bg-purple-200'
-    if(index === 2) return 'bg-purple-100'
-    return ''
+  const BG_ROW = {
+    0: 'bg-purple-300',
+    1: 'bg-purple-200',
+    2: 'bg-purple-100'
   }
 
   return (
@@ -43,11 +42,11 @@ function Ranking({ rankingData }) {
           {rankingData.map((data, index) => {
             return Object.entries(data.data().lifts).sort((a, b) => b[1] - a[1]).map(([key, value], rank) => {
               const ranking = getRank(rank);
-              const background = getBgRow(rank)
+              const background = BG_ROW[rank] ?? 'bg-white'
               return (
                 <tr
                   key={index}
-                  class={`bg-white text-zinc-900 ${background}`}
+                  class={`text-zinc-900 ${background}`}
                 >
                   <th
                     scope="row"
