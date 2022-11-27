@@ -28,6 +28,11 @@
   "eslintConfig": {
     "extends": [
       "standard"
-    ]
+    ],
+    "rules": {
+      "env": {
+        "browser": true
+      }
+    }
   }
 }
