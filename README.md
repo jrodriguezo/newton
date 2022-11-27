@@ -7,6 +7,7 @@ Deployed in Netlify [:rocket: newtonpower.netlify.com](https://newtonpower.netli
 - React
 - Vite
 - TailwindCSS
+- Design: mobile first
 
 ## Contributing
 
