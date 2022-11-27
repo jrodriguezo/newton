@@ -1,37 +1,83 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { selectUser, setUser } from './redux/features/user/userSlice'
-import googleAuth from './utils/googleAuth'
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  updateDoc
+} from 'firebase/firestore'
+import { useState, useEffect } from 'react'
+
+import { useSelector } from 'react-redux'
+import { db } from '../firebase.config'
+import Header from './components/Header'
+import Ranking from './components/Ranking'
+import { selectUser } from './redux/features/user/userSlice'
 
 function App () {
-  const dispatch = useDispatch()
-  const { user } = useSelector(selectUser)
+  // const { user } = useSelector(selectUser)
+  const [rankingData, setRankingData] = useState([])
+  // const [benchPress, setBenchPress] = useState('')
 
-  const handleLogin = async () => {
-    const userDetails = await googleAuth()
-    const { user } = userDetails
-    const { providerData } = user
-    dispatch(setUser(providerData[0]))
-    localStorage.setItem('user', JSON.stringify(providerData[0]))
+  /*
+  const updateWorkout = ({ text }) => {
+    console.log(text)
+    const dbRef = doc(db, 'ranking', user.uid)
+    const data = {
+      uid: user.uid,
+      benchPress: text
+    }
+    updateDoc(dbRef, data)
+      .then((docRef) => {
+        console.log('Document has been updated successfully')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  const handleLogout = () => {
-    dispatch(setUser(null))
-    localStorage.removeItem('user')
+  const saveWorkout = ({ text }) => {
+    console.log(text)
+    const dbRef = collection(db, 'ranking')
+    const data = {
+      uid: user.uid,
+      benchPress: text
+    }
+    addDoc(dbRef, data)
+      .then((docRef) => {
+        console.log('Document has been added successfully')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
+  */
+
+  const getRanking = async () => {
+    const dbRef = collection(db, 'ranking')
+    const docSnap = await getDocs(dbRef)
+    setRankingData(docSnap.docs)
+  }
+
+  useEffect(() => {
+    getRanking()
+  }, [])
+
+  /*
+  const handleInput = (event) => {
+    setBenchPress(event.target.value)
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      updateWorkout({ text: benchPress })
+    }
+  }
+  */
 
   return (
     <div className="bg-slate-700 min-h-screen">
-      { user
-        ? <>
-            <img src={user.photoURL} alt={user.displayName} referrerPolicy="no-referrer" />
-            <button onClick={handleLogout}>
-              Logout
-            </button>
-          </>
-        : <button onClick={handleLogin}>
-            Login
-          </button>
-      }
+      <Header />
+      <Ranking rankingData={rankingData} />
     </div>
   )
 }
