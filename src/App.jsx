@@ -27,7 +27,7 @@ function App() {
   };
 
   useEffect(() => {
-    isRankingUpdated && getRanking();
+    getRanking();
   }, [isRankingUpdated]);
 
   return (
