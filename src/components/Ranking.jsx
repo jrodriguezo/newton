@@ -1,17 +1,33 @@
 import { BACKGROUNDS, COLORS } from "../constants/colors";
+import Trophy from "../icons/Trophy";
 
 function Ranking({ rankingData }) {
   if (!rankingData.length) return null;
+
+  const getRank = (index) => {
+    const className = 'h-8 w-8 mx-auto rotate-6'
+    if(index === 0) return <Trophy className={className} />
+    if(index === 1) return <Trophy className={className} color="#C0C0C0" />
+    if(index === 2) return <Trophy className={className} color="#CD7F32" />
+    return index + 1
+  }
+
+  const getBgRow = (index) => {
+    if(index === 0) return 'bg-purple-300'
+    if(index === 1) return 'bg-purple-200'
+    if(index === 2) return 'bg-purple-100'
+    return ''
+  }
 
   return (
     <section>
       <h1 className={`text-3xl ${COLORS.PURPLE}`}>World Ranking</h1>
       <small className="block text-sm mb-4">Ordered By Weight</small>
-      <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <div class="overflow-x-auto relative shadow-md sm:rounded-lg border-purple-600 border-2">
       <table className="w-full">
         <tr className={BACKGROUNDS.PURPLE}>
           <th scope="col" class="py-3 px-6">
-            Pos
+            Rank
           </th>
           <th scope="col" class="py-3 px-6">
             Training
@@ -25,18 +41,19 @@ function Ranking({ rankingData }) {
         </tr>
         <tbody className="text-center">
           {rankingData.map((data, index) => {
-            console.log(data.data())
             return Object.entries(data.data().lifts).sort((a, b) => b[1] - a[1]).map(([key, value], rank) => {
+              const ranking = getRank(rank);
+              const background = getBgRow(rank)
               return (
                 <tr
                   key={index}
-                  class={`bg-white text-zinc-900`}
+                  class={`bg-white text-zinc-900 ${background}`}
                 >
                   <th
                     scope="row"
                     class="py-4 px-6"
                   >
-                    {rank + 1}
+                    {ranking}
                   </th>
                   <td class="py-4 px-6">{key}</td>
                   <td class="py-4 px-6">{value} Kg</td>
