@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
+import { COLORS } from '../constants/colors'
 import { selectUser, setUser } from '../redux/features/user/userSlice'
 import googleAuth from '../utils/googleAuth'
 
@@ -24,7 +25,7 @@ function Header () {
     <div className="flex justify-between items-center p-4 bg-slate-800">
       <div>
         <h1 className='tracking-widest'>Newton</h1>
-        <h2 className='tracking-tighter text-purple-300'>The power is your strength</h2>
+        <h2 className={`tracking-tighter ${COLORS.PURPLE}`}>The power is your strength</h2>
       </div>
       {user
         ? (
