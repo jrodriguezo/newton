@@ -11,12 +11,15 @@ export const userSlice = createSlice({
     // immutable state based off those changes
     setUser: (state, action) => {
       state.user = action.payload
+    },
+    setIsRankingUpdated: (state, action) => {
+      state.isRankingUpdated = action.payload
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { setUser } = userSlice.actions
+export const { setUser, setIsRankingUpdated } = userSlice.actions
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(setUserAsync(user))`. This
@@ -30,5 +33,6 @@ export const setUserAsync = (user) => (dispatch) => {
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.user)`
 export const selectUser = (state) => state.user
+export const selectIsRankingUpdated = (state) => state.isRankingUpdated
 
 export default userSlice.reducer
