@@ -39,7 +39,15 @@ function App() {
     <div className="bg-slate-700 min-h-screen">
       <Header />
       <div className="flex flex-col gap-8 p-4">
-        <Ranking rankingData={rankingData} />
+        <section>
+          <h1 className={`text-3xl ${COLORS.PURPLE}`}>World Ranking</h1>
+          <small className="block text-sm mb-4">Ordered By Weight</small>
+          <Ranking rankingData={rankingData} />
+        </section>
+        {!user && <section className="flex flex-col gap-4">
+          <h1 className={`text-2xl ${COLORS.PURPLE}`}>What are you waiting for?</h1>
+          <button className={`text-2xl ${COLORS.WHITE} tracking-wider hover:text-purple-300 p-3 bg-purple-600 rounded-lg`}>JOIN NOW</button>
+        </section>}
         {user && (
           <section>
             <h1 className={`text-3xl ${COLORS.PURPLE}`}>New Record</h1>
