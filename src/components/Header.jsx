@@ -22,7 +22,7 @@ function Header () {
   }
 
   return (
-    <div className="flex justify-between items-center p-4 bg-slate-800">
+    <div className="flex justify-between items-center p-4 bg-slate-800 w-full">
       <div>
         <h1 className='tracking-widest'>Newton</h1>
         <h2 className={`tracking-tighter ${COLORS.PURPLE}`}>The power is your strength</h2>
