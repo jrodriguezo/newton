@@ -1,8 +1,11 @@
 import React from "react";
 import { COLORS } from "../constants/colors";
+import useAuthentication from "../hooks/useAuthentication";
 import Lock from "../icons/Lock";
 
 function Disable({ children, isVisible }) {
+  const { handleLogin } = useAuthentication()
+
   const visibleClassName = isVisible
     ? "opacity-100"
     : "pointer-events-none opacity-10 blur-sm";
@@ -16,6 +19,7 @@ function Disable({ children, isVisible }) {
           You must be{" "}
           <button
             className={`${COLORS.PURPLE_TEXT_600} hover:underline hover:text-purple-400 `}
+            onClick={handleLogin}
           >
             logged
           </button> to see this content

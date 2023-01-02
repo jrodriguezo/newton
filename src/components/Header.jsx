@@ -1,25 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { COLORS } from '../constants/colors'
-import { selectUser, setUser } from '../redux/features/user/userSlice'
-import googleAuth from '../utils/googleAuth'
+import useAuthentication from '../hooks/useAuthentication'
+import { selectUser } from '../redux/features/user/userSlice'
 
 function Header () {
-  const dispatch = useDispatch()
-
   const { user } = useSelector(selectUser)
 
-  const handleLogin = async () => {
-    const userDetails = await googleAuth()
-    const { user } = userDetails
-    const { providerData } = user
-    dispatch(setUser(providerData[0]))
-    localStorage.setItem('user', JSON.stringify(providerData[0]))
-  }
-
-  const handleLogout = () => {
-    dispatch(setUser(null))
-    localStorage.removeItem('user')
-  }
+  const { handleLogin, handleLogout } = useAuthentication()
 
   return (
     <div className="flex justify-between items-center p-4 bg-slate-800 w-full">
