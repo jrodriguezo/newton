@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
-  addDoc,
   collection,
-  doc,
   getDocs,
-  updateDoc,
 } from "firebase/firestore";
 import { useDispatch, useSelector } from "react-redux";
 import { db } from "../firebase.config";
-import Header from "./components/Header";
 import PersonalLiftings from "./components/PersonalLiftings";
 import Ranking from "./components/Ranking";
 import { COLORS } from "./constants/colors";
