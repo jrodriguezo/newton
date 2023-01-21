@@ -1,0 +1,1 @@
+export const NUMBER_PLACEHOLDER_USER_NO_LOGGED = '****'

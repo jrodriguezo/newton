@@ -1,8 +1,15 @@
-import { BACKGROUNDS, COLORS } from "../constants/colors";
+import { useSelector } from "react-redux";
+import { BACKGROUNDS } from "../constants/colors";
+import { NUMBER_PLACEHOLDER_USER_NO_LOGGED } from "../constants/placeholders";
 import Trophy from "../icons/Trophy";
+import { selectUser } from "../redux/features/user/userSlice";
+import Disable from "./HideContent/Disable";
+import DisableValue from "./HideContent/DisableValue";
 import Loader from "./Loader";
 
 function Ranking({ rankingData }) {
+  const { user } = useSelector(selectUser);
+
   if (!rankingData.length) return <Loader />;
 
   const getRank = (index) => {
@@ -20,7 +27,7 @@ function Ranking({ rankingData }) {
   };
 
   return (
-    <div class="overflow-x-auto relative shadow-md sm:rounded-lg border-purple-600 border-2">
+    <div className="overflow-x-auto relative shadow-md sm:rounded-lg border-purple-600 border-2">
       <table className="w-full">
         <tr className={BACKGROUNDS.PURPLE}>
           <th scope="col" class="py-3 px-6">
@@ -30,10 +37,14 @@ function Ranking({ rankingData }) {
             Training
           </th>
           <th scope="col" class="py-3 px-6">
-            PR (Kg)
+            <DisableValue isVisible={user} isLocked={true}>
+              PR (Kg)
+            </DisableValue>
           </th>
           <th scope="col" class="py-3 px-6">
-            User
+            <DisableValue isVisible={user} isLocked={true}>
+              User
+            </DisableValue>
           </th>
         </tr>
         <tbody className="text-center">
@@ -44,13 +55,19 @@ function Ranking({ rankingData }) {
                 const ranking = getRank(rank);
                 const background = BG_ROW[rank] ?? "bg-white";
                 return (
-                  <tr key={index} class={`text-zinc-900 ${background}`}>
-                    <th scope="row" class="py-4 px-6">
+                  <tr key={index} className={`text-zinc-900 ${background}`}>
+                    <th scope="row" className="py-4 px-6">
                       {ranking}
                     </th>
-                    <td class="py-4 px-6">{key}</td>
-                    <td class="py-4 px-6">{value} Kg</td>
-                    <td class="py-4 px-6">{data.data().user}</td>
+                    <td className="py-4 px-6">{key}</td>
+                    <td className={`py-4 px-6`}>
+                      <DisableValue isVisible={user}>{value} Kg</DisableValue>
+                    </td>
+                    <td className={`py-4 px-6`}>
+                      <DisableValue isVisible={user}>
+                        {data.data().user}
+                      </DisableValue>
+                    </td>
                   </tr>
                 );
               });

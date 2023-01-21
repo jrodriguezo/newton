@@ -13,7 +13,7 @@ import {
   setIsRankingUpdated,
 } from "./redux/features/user/userSlice";
 import girl from "./assets/background/girl-deadlifting.jpg";
-import Disable from "./components/Disable";
+import Disable from "./components/HideContent/Disable";
 
 function App() {
   const dispatch = useDispatch();
