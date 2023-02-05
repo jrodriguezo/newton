@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "../firebase.config";
 import PersonalLiftings from "./components/PersonalLiftings";
 import Ranking from "./components/Ranking";
-import { COLORS } from "./constants/colors";
 import {
   selectUser,
   setIsRankingUpdated,
 } from "./redux/features/user/userSlice";
-import girl from "./assets/background/girl-deadlifting.jpg";
-import Disable from "./components/HideContent/Disable";
+import girl from "@assets/background/girl-deadlifting.jpg";
+import Disable from "@components/HideContent/Disable";
+import { COLORS } from "@constants/colors";
 
 function App() {
   const dispatch = useDispatch();
