@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { BACKGROUNDS } from "../constants/colors";
+import { TRANSLATE_LIFTINGS } from "../constants/translations/variables";
 import Trophy from "../icons/Trophy";
 import { selectUnit } from "../redux/features/settings/selectors";
 import { selectUser } from "../redux/features/user/userSlice";
@@ -64,7 +65,7 @@ function Ranking({ rankingData }) {
                     <th scope="row" className="py-4 px-6">
                       {ranking}
                     </th>
-                    <td className="py-4 px-6">{key}</td>
+                    <td className="py-4 px-6">{TRANSLATE_LIFTINGS[key] ?? key}</td>
                     <td className={`py-4 px-6`}>
                       <DisableValue isVisible={user}>{typeof value === 'number' ? value : value.weight}</DisableValue>
                     </td>
