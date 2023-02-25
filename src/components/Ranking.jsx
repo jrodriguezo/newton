@@ -1,12 +1,14 @@
 import { useSelector } from "react-redux";
 import { BACKGROUNDS } from "../constants/colors";
 import Trophy from "../icons/Trophy";
+import { selectUnit } from "../redux/features/settings/selectors";
 import { selectUser } from "../redux/features/user/userSlice";
 import DisableValue from "./HideContent/DisableValue";
 import Loader from "./Loader";
 
 function Ranking({ rankingData }) {
   const { user } = useSelector(selectUser);
+  const unit = useSelector(selectUnit);
 
   if (!rankingData.length) return <Loader />;
 
@@ -36,7 +38,7 @@ function Ranking({ rankingData }) {
           </th>
           <th scope="col" class="py-3 px-6">
             <DisableValue isVisible={user} isLocked={true}>
-              PR (Kg)
+              PR ({unit})
             </DisableValue>
           </th>
           <th scope="col" class="py-3 px-6">
@@ -64,7 +66,7 @@ function Ranking({ rankingData }) {
                     </th>
                     <td className="py-4 px-6">{key}</td>
                     <td className={`py-4 px-6`}>
-                      <DisableValue isVisible={user}>{typeof value === 'number' ? `${value} kg` : `${value.weight} ${value.unit}`}</DisableValue>
+                      <DisableValue isVisible={user}>{typeof value === 'number' ? value : value.weight}</DisableValue>
                     </td>
                     <td className={`py-4 px-6`}>
                       <DisableValue isVisible={user}>
