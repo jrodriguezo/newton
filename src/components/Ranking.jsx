@@ -25,7 +25,7 @@ function Ranking({ rankingData }) {
   };
 
   return (
-    <div className="overflow-x-auto relative shadow-md sm:rounded-lg border-purple-600 border-2">
+    <div className="overflow-x-auto relative shadow-md rounded-md border-purple-600 border-2">
       <table className="w-full">
         <tr className={BACKGROUNDS.PURPLE}>
           <th scope="col" class="py-3 px-6">
