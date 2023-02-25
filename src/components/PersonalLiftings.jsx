@@ -5,49 +5,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { db } from "../../firebase.config";
 import { COLORS } from "../constants/colors";
 import { WEIGHT_TRAININGS } from "../constants/trainings";
-import { selectUser, setIsRankingUpdated } from "../redux/features/user/userSlice";
+import {
+  selectUser,
+  setIsRankingUpdated,
+} from "../redux/features/user/userSlice";
+import { saveLift } from "../utils/data";
 
 function PersonalLiftings() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
-  
-  const saveWorkout = ({ training, weight }) => {
-    const dbRef = collection(db, 'ranking')
-    const data = {
-      uid: user.uid,
-      user: user.displayName.split(' ')[0],
-      lifts: {
-        [training]: Number(weight),
-      },
-    };
+
+  const saveWorkout = ({ lift }) => {
+    const dbRef = collection(db, "ranking");
+    const data = saveLift({ user, lift });
+
     addDoc(dbRef, data)
       .then((docRef) => {
-        dispatch(setIsRankingUpdated(true))
-        console.log('Document has been added successfully')
+        dispatch(setIsRankingUpdated(true));
+        console.log("Document has been added successfully");
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }
+        console.log(error);
+      });
+  };
 
-  const updateWorkout = ({ training, weight }) => {
+  const updateWorkout = ({ lift }) => {
     const dbRef = doc(db, "ranking", user.uid);
-    const data = {
-      uid: user.uid,
-      user: user.displayName.split(' ')[0],
-      lifts: {
-        [training]: Number(weight),
-      },
-    };
+    const data = saveLift({ user, lift });
+
     setDoc(dbRef, data, { merge: true })
       .then((docRef) => {
-        dispatch(setIsRankingUpdated(true))
+        dispatch(setIsRankingUpdated(true));
         console.log("Document has been updated successfully");
       })
       .catch((error) => {
         // if we cannot update the fields introduced by user,
         // that means the user is the first time using app
-        saveWorkout({training, weight})
+        saveWorkout({ lift });
       });
   };
 
@@ -57,7 +51,12 @@ function PersonalLiftings() {
   );
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateWorkout({ training: trainingSelected, weight: weightNumber });
+    const lift = {
+      training: trainingSelected,
+      weight: weightNumber,
+      unit: "kg",
+    };
+    updateWorkout({ lift });
   };
 
   const handleSelect = (event) => {

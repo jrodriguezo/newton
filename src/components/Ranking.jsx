@@ -1,9 +1,7 @@
 import { useSelector } from "react-redux";
 import { BACKGROUNDS } from "../constants/colors";
-import { NUMBER_PLACEHOLDER_USER_NO_LOGGED } from "../constants/placeholders";
 import Trophy from "../icons/Trophy";
 import { selectUser } from "../redux/features/user/userSlice";
-import Disable from "./HideContent/Disable";
 import DisableValue from "./HideContent/DisableValue";
 import Loader from "./Loader";
 
@@ -46,11 +44,16 @@ function Ranking({ rankingData }) {
               User
             </DisableValue>
           </th>
+          <th scope="col" class="py-3 px-6">
+            <DisableValue isVisible={user} isLocked={true}>
+              Date
+            </DisableValue>
+          </th>
         </tr>
         <tbody className="text-center">
           {rankingData.map((data, index) => {
             return Object.entries(data.data().lifts)
-              .sort((a, b) => b[1] - a[1])
+              .sort((a, b) => (b[1]?.weight ?? b[1]) - (a[1]?.weight ?? a[1]))
               .map(([key, value], rank) => {
                 const ranking = getRank(rank);
                 const background = BG_ROW[rank] ?? "bg-white";
@@ -61,11 +64,16 @@ function Ranking({ rankingData }) {
                     </th>
                     <td className="py-4 px-6">{key}</td>
                     <td className={`py-4 px-6`}>
-                      <DisableValue isVisible={user}>{value} Kg</DisableValue>
+                      <DisableValue isVisible={user}>{typeof value === 'number' ? `${value} kg` : `${value.weight} ${value.unit}`}</DisableValue>
                     </td>
                     <td className={`py-4 px-6`}>
                       <DisableValue isVisible={user}>
                         {data.data().user}
+                      </DisableValue>
+                    </td>
+                    <td className={`py-4 px-6`}>
+                      <DisableValue isVisible={user}>
+                        {value.date}
                       </DisableValue>
                     </td>
                   </tr>
