@@ -8,6 +8,7 @@ import { db } from "../firebase.config";
 import PersonalLiftings from "./components/PersonalLiftings";
 import Ranking from "./components/Ranking";
 import {
+  selectIsRankingUpdated,
   selectUser,
   setIsRankingUpdated,
 } from "./redux/features/user/userSlice";
@@ -17,8 +18,10 @@ import { COLORS } from "@constants/colors";
 
 function App() {
   const dispatch = useDispatch();
+  
   const { user } = useSelector(selectUser);
-  const isRankingUpdated = useSelector((prev) => prev.user.isRankingUpdated);
+  const isRankingUpdated = useSelector(selectIsRankingUpdated);
+
   const [rankingData, setRankingData] = useState([]);
 
   const getRanking = async () => {
