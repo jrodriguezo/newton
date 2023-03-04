@@ -1,4 +1,4 @@
-function Settings({ className, color }) {
+function SettingsIcon({ className, color }) {
   return (
     <svg className={className} fill={color} height="800px" width="800px"
       viewBox="0 0 472.615 472.615">
@@ -14,4 +14,4 @@ function Settings({ className, color }) {
   );
 }
 
-export default Settings;
+export default SettingsIcon;

@@ -1,7 +1,7 @@
 export const PANEL_SETTINGS = {
     LANGUAGE: {
         EN: 'english',
-        // ES: 'spanish'
+        ES: 'spanish'
     },
     UNITS: {
         KG: 'kg',
