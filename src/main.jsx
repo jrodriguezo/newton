@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import App from './App'
 import store from './redux/store'
 import Header from './components/Header'
+import Footer from './components/Footer/Footer'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <div className='lg:max-w-5xl w-full'>
           <Header />
           <App />
+          <Footer />
         </div>
       </main>
     </Provider>

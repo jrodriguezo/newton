@@ -15,10 +15,11 @@ import {
 import girl from "@assets/background/girl-deadlifting.jpg";
 import Disable from "@components/HideContent/Disable";
 import { COLORS } from "@constants/colors";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
-  
+
   const { user } = useSelector(selectUser);
   const isRankingUpdated = useSelector(selectIsRankingUpdated);
 
@@ -36,28 +37,30 @@ function App() {
   }, [isRankingUpdated]);
 
   return (
-    <div className="min-h-screen">
-      <div className="bg-purple-800 absolute w-full max-w-5xl">
-        <img
-          className="opacity-60 w-full aspect-auto"
-          src={girl}
-          alt="girl doing deadlift workout"
-        />
+    <div className="relative z-[1] flex flex-col gap-8 bg-[#0f191e] min-h-screen">
+      <div className=" inset-0 absolute z-[-1]">
+        <figure className="bg-purple-800">
+          <img
+            className=" opacity-60 w-full aspect-auto"
+            src={girl}
+            alt="girl doing deadlift workout"
+          />
+        </figure>
       </div>
-      <div className="relative top-36 lg:top-96 flex flex-col gap-8 p-4">
-        <section>
+      <section className="flex flex-col gap-8 p-4 mt-32 lg:mt-96">
+        <article>
           <h1 className={`text-3xl ${COLORS.PURPLE}`}>World Ranking</h1>
           <small className="block text-sm mb-4">Ordered By Weight</small>
           <Ranking rankingData={rankingData} />
-        </section>
+        </article>
         <Disable isVisible={user}>
-          <section>
+          <article>
             <h1 className={`text-3xl ${COLORS.PURPLE}`}>New Record</h1>
             <small className="block text-sm mb-4">Add your PR</small>
             <PersonalLiftings />
-          </section>
+          </article>
         </Disable>
-      </div>
+      </section>
     </div>
   );
 }

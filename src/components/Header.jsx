@@ -13,12 +13,12 @@ function Header() {
   const { handleLogin, handleLogout } = useAuthentication()
 
   return (
-    <div className="sticky flex top-0 z-10 justify-between items-center p-4 bg-slate-800 w-full">
+    <div className="sticky flex flex-wrap top-0 z-10 justify-between items-center p-4 bg-slate-800 w-full">
       <div>
         <h1 className='tracking-widest'>Newton</h1>
         <h2 className={`tracking-tighter ${COLORS.PURPLE}`}>The power is your strength</h2>
       </div>
-      <div className='flex gap-4'>
+      <div className='flex gap-4 flex-wrap'>
         <div className='relative'>
           <button onClick={() => setOpenSettings(prev => !prev)}>
             <SettingsIcon color='#a5673f' className='w-8 h-8 p-1 bg-orange-300 rounded-[50%] hover:opacity-90' />
