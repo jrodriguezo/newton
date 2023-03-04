@@ -24,7 +24,7 @@ function Header() {
           <button onClick={() => setOpenSettings(prev => !prev)}>
             <Settings color='#a5673f' className='w-8 h-8 p-1 bg-orange-300 rounded-[50%] hover:opacity-90' />
           </button>
-          <div className={`absolute flex flex-col gap-2 transition-all duration-500 ${openSettings ? 'translate-y-[0%] opacity-1' : 'translate-y-[-20%] opacity-0 pointer-events-none'} top-16 right-0 min-w-[150px] bg-orange-300 border rounded-lg p-2`}>
+          <div className={`absolute flex flex-col gap-2 transition-all duration-500 ${openSettings ? 'translate-y-[0%] opacity-1' : 'translate-y-[-20%] opacity-0 pointer-events-none'} top-16 right-0 min-w-[150px] bg-orange-300 rounded-lg p-2`}>
             <div>
               <label>Language</label>
               <Dropdown id="language" options={Object.values(PANEL_SETTINGS.LANGUAGE)} />
