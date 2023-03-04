@@ -10,6 +10,7 @@ import {
   setIsRankingUpdated,
 } from "../redux/features/user/userSlice";
 import { saveLift } from "../utils/data";
+import Dropdown from "./Structure/Dropdown";
 
 function PersonalLiftings() {
   const dispatch = useDispatch();
@@ -72,18 +73,7 @@ function PersonalLiftings() {
       >
         Select lift
       </label>
-      <select
-        onChange={handleSelect}
-        value={trainingSelected}
-        id="trainings"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-300 focus:border-purple-300 block w-full p-2.5"
-      >
-        {Object.values(WEIGHT_TRAININGS).map((training) => (
-          <option className="text-xl py-4" value={training}>
-            {training}
-          </option>
-        ))}
-      </select>
+      <Dropdown onChange={handleSelect} value={trainingSelected} id="trainings" options={Object.values(WEIGHT_TRAININGS)} />
       <label
         for="weight"
         className={`block my-2 text-sm font-medium ${COLORS.PURPLE} dark:text-white`}
