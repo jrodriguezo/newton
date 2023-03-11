@@ -49,13 +49,13 @@ function App() {
       </div>
       <section className="flex flex-col gap-8 p-4 mt-32 lg:mt-96">
         <article>
-          <h1 className={`text-3xl ${COLORS.PURPLE}`}>World Ranking</h1>
+          <h2 className={`text-3xl ${COLORS.PURPLE}`}>World Ranking</h2>
           <small className="block text-sm mb-4">Ordered By Weight</small>
           <Ranking rankingData={rankingData} />
         </article>
         <Disable isVisible={user}>
           <article>
-            <h1 className={`text-3xl ${COLORS.PURPLE}`}>New Record</h1>
+            <h2 className={`text-3xl ${COLORS.PURPLE}`}>New Record</h2>
             <small className="block text-sm mb-4">Add your PR</small>
             <PersonalLiftings />
           </article>
