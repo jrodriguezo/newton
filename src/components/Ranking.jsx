@@ -5,13 +5,12 @@ import Trophy from "../icons/Trophy";
 import { selectUnit } from "../redux/features/settings/selectors";
 import { selectUser } from "../redux/features/user/userSlice";
 import DisableValue from "./HideContent/DisableValue";
-import Loader from "./Loader";
 
 function Ranking({ rankingData }) {
   const { user } = useSelector(selectUser);
   const unit = useSelector(selectUnit);
 
-  if (!rankingData.length) return <Loader />;
+  if (!rankingData.length) return null
 
   const getRank = (index) => {
     const className = "h-8 w-8 mx-auto rotate-6";
@@ -31,23 +30,23 @@ function Ranking({ rankingData }) {
     <div className="overflow-x-auto relative shadow-md rounded-md border-purple-600 border-2">
       <table className="w-full">
         <tr className={BACKGROUNDS.PURPLE}>
-          <th scope="col" class="py-3 px-6">
+          <th scope="col" className="py-3 px-6">
             Rank
           </th>
-          <th scope="col" class="py-3 px-6">
+          <th scope="col" className="py-3 px-6">
             Training
           </th>
-          <th scope="col" class="py-3 px-6">
+          <th scope="col" className="py-3 px-6">
             <DisableValue isVisible={user} isLocked={true}>
               PR ({unit})
             </DisableValue>
           </th>
-          <th scope="col" class="py-3 px-6">
+          <th scope="col" className="py-3 px-6">
             <DisableValue isVisible={user} isLocked={true}>
               User
             </DisableValue>
           </th>
-          <th scope="col" class="py-3 px-6">
+          <th scope="col" className="py-3 px-6">
             <DisableValue isVisible={user} isLocked={true}>
               Date
             </DisableValue>
@@ -61,7 +60,7 @@ function Ranking({ rankingData }) {
                 const ranking = getRank(rank);
                 const background = BG_ROW[rank] ?? "bg-white";
                 return (
-                  <tr key={index} className={`text-zinc-900 ${background}`}>
+                  <tr key={`ranking-${rank}`} className={`text-zinc-900 ${background}`}>
                     <th scope="row" className="py-4 px-6">
                       {ranking}
                     </th>

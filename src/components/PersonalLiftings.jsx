@@ -11,6 +11,7 @@ import {
 } from "../redux/features/user/userSlice";
 import { saveLift } from "../utils/data";
 import Dropdown from "./Structure/Dropdown";
+import Input from "./Structure/Input";
 
 function PersonalLiftings() {
   const dispatch = useDispatch();
@@ -68,26 +69,25 @@ function PersonalLiftings() {
   return (
     <form onSubmit={handleSubmit}>
       <label
-        for="trainings"
+        htmlFor="trainings"
         className={`block my-2 text-sm font-medium ${COLORS.PURPLE} dark:text-white`}
       >
         Select lift
       </label>
       <Dropdown onChange={handleSelect} value={trainingSelected} id="trainings" options={Object.values(WEIGHT_TRAININGS)} />
       <label
-        for="weight"
+        htmlFor="weight"
         className={`block my-2 text-sm font-medium ${COLORS.PURPLE} dark:text-white`}
       >
         Add your weight
       </label>
-      <input
-        value={weightNumber}
-        onChange={(event) => setWeightNumber(event.target.value)}
-        type="number"
+      <Input 
         id="weight"
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-300 focus:border-purple-300 block w-full p-2.5"
+        onChange={(event) => setWeightNumber(event.target.value)}
         placeholder="Set weight of your PR"
-        required
+        required={true}
+        type="number"
+        value={weightNumber}
       />
       <div className="flex justify-end my-2">
         <button
