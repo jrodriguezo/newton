@@ -86,7 +86,7 @@ function PersonalLiftings() {
         type="number"
         id="weight"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-300 focus:border-purple-300 block w-full p-2.5"
-        placeholder=""
+        placeholder="Set weight of your PR"
         required
       />
       <div className="flex justify-end my-2">
