@@ -3,7 +3,8 @@ export const generateDate = () => {
   const yyyy = today.getFullYear();
   const mm = (today.getMonth() + 1).toString()
   const mmTransformed = mm.length === 2 ? mm : `0${mm}`
-  let dd = today.getDate();
+  const dd = today.getDate();
+  const ddTransformed = dd.length === 2 ? mm : `0${mm}`
 
-  return `${yyyy}/${mmTransformed}/${dd}`
+  return `${yyyy}/${mmTransformed}/${ddTransformed}`
 };
